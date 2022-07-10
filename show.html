@@ -3,7 +3,63 @@
 <head>
     <meta charset="utf-8">
     <title>驯龙高手III</title>
-    <link rel="stylesheet" type="text/css" href="https://demisxl.github.io/show.css"/>
+    <style>*{margin: 0;padding: 0;}
+body{
+	background-image: url(./resouce/background.png);
+	background-size: cover;
+}
+#box{
+	width: 275px;height: 25rem;margin: auto;
+	position: fixed;left: 0;bottom: 0;right: 0;top: 0;
+	animation:zhuan 45s linear infinite;
+		transform-style:preserve-3d;
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+}
+img,video{
+	width: 275px;height: 300px;position: absolute;
+}
+@keyframes zhuan{
+	0%{
+		transform: rotateX(0deg) rotateY(0deg);
+	}
+	25%{
+		transform: rotateX(20deg) rotateY(180deg);
+	}
+	50%{
+		transform: rotateX(0deg) rotateY(360deg);
+	}
+	75%{
+		transform: rotateX(-20deg) rotateY(540deg);
+	}
+	100%{
+		transform: rotateX(0deg) rotateY(720deg);
+	}
+}
+
+img:nth-child(1){transform: rotateY(36deg) translateZ(600px);}
+img:nth-child(2){transform: rotateY(72deg) translateZ(600px);}
+img:nth-child(3){transform: rotateY(108deg) translateZ(600px);}
+img:nth-child(4){transform: rotateY(144deg) translateZ(600px);}
+img:nth-child(5){transform: rotateY(180deg) translateZ(600px);}
+img:nth-child(6){transform: rotateY(216deg) translateZ(600px);}
+img:nth-child(7){transform: rotateY(252deg) translateZ(600px);}
+img:nth-child(8){transform: rotateY(288deg) translateZ(600px);}
+img:nth-child(9){transform: rotateY(324deg) translateZ(600px);}
+img:nth-child(10){transform: rotateY(360deg) translateZ(600px);}
+
+img:nth-child(11){transform: rotateY(18deg) translateZ(400px);}
+img:nth-child(12){transform: rotateY(54deg) translateZ(400px);}
+img:nth-child(13){transform: rotateY(90deg) translateZ(400px);}
+img:nth-child(14){transform: rotateY(126deg) translateZ(400px);}
+img:nth-child(15){transform: rotateY(162deg) translateZ(400px);}
+img:nth-child(16){transform: rotateY(198deg) translateZ(400px);}
+img:nth-child(17){transform: rotateY(234deg) translateZ(400px);}
+img:nth-child(18){transform: rotateY(270deg) translateZ(400px);}
+img:nth-child(19){transform: rotateY(306deg) translateZ(400px);}
+img:nth-child(20){transform: rotateY(342deg) translateZ(400px);}
+</style>
+<!--     <link rel="stylesheet" type="text/css" href="https://demisxl.github.io/show.css"/> -->
     <link rel="shortcut icon" href="./resouce/header.ico" type="image/x-icon"/>
 </head>
 <body>
