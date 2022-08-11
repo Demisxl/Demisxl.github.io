@@ -1,39 +1,221 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>摸鱼ing</title>
     <style>
-        h1{
-            text-align: center;
+        body {
+            width: 100%;
         }
-        h3{
-            text-align: center;
+
+        @media only screen and (min-width: 665px) {
+            h1 {
+                text-align: center;
+            }
+
+            h3 {
+                text-align: center;
+            }
+
+            h2 {
+                text-align: center;
+            }
+
+            p {
+                text-align: center;
+                font-size: 30px;
+            }
         }
-        h2 {
+
+        @media only screen and (max-width: 666px) {
+            h1 {
+                font-size: 30px;
+                text-align: center;
+            }
+
+            h3 {
+                text-align: center;
+            }
+
+
+            h2 {
+                text-align: center;
+            }
+
+            p {
+                text-align: center;
+                font-size: 27px;
+            }
+        }
+
+        body {
+            font-size: 20px;
+            margin: 0;
+            border: 0;
+        }
+
+        #clock, #ontime, #onday {
             text-align: center;
         }
     </style>
 </head>
 
-
 <body>
-<h1>摸鱼 摸鱼 </br></br>^_^你又在摸鱼^_^</h1></br>
-<h3>
-    摸鱼使你快乐！
-</h3>
+<div>
+    <p>摸鱼 摸鱼 </br></br>^_^你又在摸鱼^_^</p></br>
+</div>
+<div>
+    <p>
+        摸鱼使你快乐！
+    </p>
+</div>
+<div>
+    <p>
+        而生活就需要快乐！！
+    </p>
+</div>
+<div>
+    <p>
+        所以下班也要记得摸鱼哦！！！
+    </p>
+</div>
+<div>
+    <p>
+        所以无时无刻都要记得
+    </p>
+</div>
+<div>
+    <p>
+        快乐呀！！！！
+    </p>
+</div>
+<div>
+    <p>
+        ^_^
+    </p>
+</div>
 
-<h3>
-    而生活就需要快乐！！
-</h3>
+<div>
+    <div id="clock"></div>
+    </br>
+    <div id="ontime"></div>
 
-<h3>
-    所以下班也要记得摸鱼哦！！！
-</h3>
+</div>
+</br>
+<div id="onday"></div>
 
+</div>
 
-<h2>
-    所以记得无时无刻都要记得快乐呀！！！！
-</h2>
 </body>
+<script type="text/javascript">
+    var clock = new Clock();
+    clock.display(document.getElementById("clock"));
+
+    function Clock() {
+        var date = new Date();
+        this.year = date.getFullYear();
+        this.month = date.getMonth() + 1;
+        this.date = date.getDate();
+        this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
+        this.hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        this.minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        this.second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+        this.toString = function () {
+            return "现在是北京时间：" + this.year + "年" + this.month + "月" + this.date + "日 " + this.hour + ":" + this.minute + ":" + this.second + " " + this.day;
+        };
+
+        this.toSimpleDate = function () {
+            return this.year + "-" + this.month + "-" + this.date;
+        };
+
+        this.toDetailDate = function () {
+            return this.year + "-" + this.month + "-" + this.date + " " + this.hour + ":" + this.minute + ":" + this.second;
+        };
+
+        this.display = function (ele) {
+            var clock = new Clock();
+            ele.innerHTML = clock.toString();
+            window.setTimeout(function () {
+                clock.display(ele);
+            }, 1000);
+        };
+    }
+
+    var ontime = new Ontime();
+    ontime.display(document.getElementById("ontime"));
+
+
+    function Ontime() {
+        var date = new Date();
+
+        this.hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        if (this.hour > 17) {
+            this.hour = 32 - this.hour;
+            this.text = '距离上班还有';
+        } else {
+            this.hour = 17 - this.hour;
+            this.text = '距离下班还有'
+            // if(this.hour < 1 ){
+            //     this.ishour = '分钟';
+            //
+            // }
+        }
+
+        this.minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        this.minute = 59 - this.minute;
+        parseInt(this.minute)
+        this.second = this.minute < 10 ? "0" + parseInt(this.minute) : this.minute;
+
+        this.second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        this.second = 60 - this.second;
+        parseInt(this.second)
+        this.second = this.second < 10 ? "0" + parseInt(this.second) : this.second;
+
+
+        this.toString = function () {
+            return this.text + ":" + this.hour + ":" + this.minute + ":" + this.second + "小时";
+        };
+
+
+        this.toDetailDate = function () {
+            return this.hour + ":" + this.minute + ":" + this.second;
+        };
+
+        this.display = function (ele) {
+            var ontime = new Ontime();
+            ele.innerHTML = ontime.toString();
+            window.setTimeout(function () {
+                ontime.display(ele);
+            }, 1000);
+        };
+    }
+
+
+    var onday = new Onday();
+    onday.display(document.getElementById("onday"));
+
+    function Onday() {
+
+        var date = new Date();
+
+        this.day = new Array("星期日,不上班", "星期一，美好的一周开始了", "星期二，距离周末还有四天", "星期三，快了快了已经一半了", "星期四，距离周末还有最后两天了", "星期五，再坚持一下，明天就放假", "星期六，不上班")[date.getDay()];
+
+
+        this.toString = function () {
+            return "今天是：" + this.day;
+        };
+
+
+        this.display = function (ele) {
+            var onday = new Onday();
+            ele.innerHTML = onday.toString();
+            window.setTimeout(function () {
+                onday.display(ele);
+            }, 1000);
+        };
+    }
+
+</script>
 </html>
