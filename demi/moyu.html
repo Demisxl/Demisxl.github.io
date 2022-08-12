@@ -153,28 +153,28 @@
         this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
         this.hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
         // if (this.day == 星期日 || this.day == 星期一 || this.day == 星期二 || this.day == 星期三 || this.day == 星期四) {
-            if (this.hour > 17) {
-                this.hour = 32 - this.hour;
-                this.text = '距离上班还有';
-                this.ishour = '小时'
-                if (this.hour < 1) {
-                    this.ishour = '分钟';
-                }
-            } else if (this.hour < 12) {
-                this.hour = 11 - this.hour;
-                this.text = '距离午休还有';
-                this.ishour = '小时'
-                if (this.hour < 1) {
-                    this.ishour = '分钟';
-                }
-            } else {
-                this.hour = 17 - this.hour;
-                this.text = '距离下班还有'
-                this.ishour = '小时'
-                if (this.hour < 1) {
-                    this.ishour = '分钟';
-                }
+        if (this.hour > 17) {
+            this.hour = 32 - this.hour;
+            this.text = '距离上班还有';
+            this.ishour = '小时'
+            if (this.hour < 1) {
+                this.ishour = '分钟';
             }
+        } else if (this.hour < 12) {
+            this.hour = 11 - this.hour;
+            this.text = '距离午休还有';
+            this.ishour = '小时'
+            if (this.hour < 1) {
+                this.ishour = '分钟';
+            }
+        } else {
+            this.hour = 17 - this.hour;
+            this.text = '距离下班还有'
+            this.ishour = '小时'
+            if (this.hour < 1) {
+                this.ishour = '分钟';
+            }
+        }
         // }
 
         this.minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
@@ -189,7 +189,9 @@
 
 
         this.toString = function () {
-            return this.text + " : " + this.hour + ": " + this.minute + " : " + this.second + " " + this.ishour;
+            this.hour = this.hour < 10 ? "0" + this.hour : this.hour;
+            this.minute = this.minute < 10 ? "0" + this.minute : this.minute;
+            return this.text + " " + this.hour + ":" + this.minute + ":" + this.second + " " + this.ishour;
         };
 
 
@@ -214,7 +216,7 @@
 
         var date = new Date();
 
-        this.day = new Array("星期天,美好的一天", "星期一，美好的一周开始了", "星期二，距离周末还有四天", "星期三，快了快了已经一半了", "星期四，距离周末还有最后两天了", "星期五，再坚持一下，明天就放假了", "星期六，不上班")[date.getDay()];
+        this.day = new Array("星期天,美好的一天", "星期一，美好的一周又开始了", "星期二，距离周末还有四天", "星期三，快了快了已经一半了", "星期四，距离周末还有最后两天了", "星期五，再坚持一下，马上就放假了", "星期六，不上班")[date.getDay()];
 
 
         this.toString = function () {
