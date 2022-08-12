@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>摸鱼ing</title>
+    <title>第二课堂</title>
     <style>
         body {
             width: 100%;
         }
-
 
         @media only screen and (min-width: 665px) {
             h1 {
@@ -78,7 +77,7 @@
 </div>
 <div>
     <p>
-        所以下班也要记得摸鱼哦！！！
+        所以上班要记得摸鱼哦！！！
     </p>
 </div>
 <div>
@@ -88,7 +87,7 @@
 </div>
 <div>
     <p>
-        快乐呀！！！！
+        快乐呀 ！！！！
     </p>
 </div>
 <div>
@@ -101,11 +100,8 @@
     <div id="clock"></div>
     </br>
     <div id="ontime"></div>
-
-</div>
-</br>
-<div id="onday"></div>
-
+    </br>
+    <div id="onday"></div>
 </div>
 
 </body>
@@ -127,13 +123,13 @@
             return "现在是北京时间：" + this.year + "年" + this.month + "月" + this.date + "日" + this.hour + ":" + this.minute + ":" + this.second;
         };
 
-//         this.toSimpleDate = function () {
-//             return this.year + " - " + this.month + " - " + this.date;
-//         };
-
-//         this.toDetailDate = function () {
-//             return this.year + " - " + this.month + " - " + this.date + " " + this.hour + " : " + this.minute + " : " + this.second;
-//         };
+        // this.toSimpleDate = function () {
+        //     return this.year + " - " + this.month + " - " + this.date;
+        // };
+        //
+        // this.toDetailDate = function () {
+        //     return this.year + " - " + this.month + " - " + this.date + " " + this.hour + " : " + this.minute + " : " + this.second;
+        // };
 
         this.display = function (ele) {
             var clock = new Clock();
@@ -144,60 +140,245 @@
         };
     }
 
+
     var ontime = new Ontime();
     ontime.display(document.getElementById("ontime"));
-
 
     function Ontime() {
         var date = new Date();
         this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
         this.hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-        // if (this.day == 星期日 || this.day == 星期一 || this.day == 星期二 || this.day == 星期三 || this.day == 星期四) {
-        if (this.hour > 17) {
-            this.hour = 32 - this.hour;
-            this.text = '距离上班还有';
-            this.ishour = '小时'
-            if (this.hour < 1) {
-                this.ishour = '分钟';
-            }
-        } else if (this.hour < 12) {
-            this.hour = 11 - this.hour;
-            this.text = '距离午休还有';
-            this.ishour = '小时'
-            if (this.hour < 1) {
-                this.ishour = '分钟';
-            }
-        } else {
-            this.hour = 17 - this.hour;
-            this.text = '距离下班还有'
-            this.ishour = '小时'
-            if (this.hour < 1) {
-                this.ishour = '分钟';
-            }
-        }
-        // }
-
         this.minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         this.minute = 59 - this.minute;
-        parseInt(this.minute)
-        this.second = this.minute < 10 ? "0" + parseInt(this.minute) : this.minute;
-
         this.second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
         this.second = 60 - this.second;
-        parseInt(this.second)
-        this.second = this.second < 10 ? "0" + parseInt(this.second) : this.second;
+        this.ishour = '小时';
 
+        //周一到周四正常上下班
+        if (date.getDay() === 1 || date.getDay() === 2 || date.getDay() === 3 || date.getDay() === 4) {
+            if (this.hour > 17) {
+                if (20 > this.hour) {
+                    this.text = '蟹老板，我下班了';
+                } else if (22 > this.hour > 19) {
+                    this.hour = 32 - this.hour;
+                    this.text = '距离明天上班还有';
+                } else if (23 > this.hour > 21) {
+                    this.hour = 22 - this.hour;
+                    this.text = '根据健康作息休息时间，距离睡觉还有'
+                    if (this.hour < 1) {
+                        this.ishour = '分钟，再不睡觉！你生命的宽度也许会增加，但是你的生命长度肯定会减少';
+                    }
+                } else {
+                    this.text = '完了，BBQ了'
+                    this.ishour = '你是秃头小宝贝';
+                }
+            } else if (this.hour < 12) {
+                if (this.hour < 9) {
+                    if (this.hour < 2) {
+                        this.hour = 8 - this.hour;
+                        this.text = '还不睡??!!?,距离上班还有';
+                    } else if (this.hour < 4) {
+                        this.hour = 8 - this.hour;
+                        this.text = '还不睡？你是熬夜小冠军,距离上班还有';
+                    } else if (this.hour < 6) {
+                        this.hour = 8 - this.hour;
+                        this.text = '还没睡？还是说醒得太早，又或者是半夜惊醒,距离上班还有';
+                    } else {
+                        this.hour = 8 - this.hour;
+                        this.text = '该起床上班了，距离上班还有';
+                        if (this.hour < 1) {
+                            this.ishour = '分钟';
+                        }
+                    }
+                } else if (8 < this.hour) {
+                    this.hour = 11 - this.hour;
+                    this.text = '距离午休还有';
+                    if (this.hour < 1) {
+                        this.ishour = '分钟';
+                    }
+                }
+            } else if (11 < this.hour < 18) {
+                if (this.hour < 13) {
+                    this.hour = this.hour - 12;
+                    this.text = '午休已经开始';
+                    this.ishour = '分钟';
+                } else if (12 < this.hour < 14) {
+                    this.hour = 13 - this.hour;
+                    this.text = '距离午休结束还有';
+                    this.ishour = '分钟';
+                } else {
+                    this.hour = 17 - this.hour;
+                    this.text = '距离下班还有'
+                    if (this.hour < 1) {
+                        this.ishour = '分钟';
+                    }
+                }
+            }
+        } else {
+            //周日
+            if (date.getDay() === 0) {
+                if (this.hour > 17) {
+                    if (22 > this.hour) {
+                        this.hour = 32 - this.hour;
+                        this.text = '距离明天上班还有';
+                    } else if (23 > this.hour > 21) {
+                        this.hour = 22 - this.hour;
+                        this.text = '根据健康作息休息时间，距离睡觉还有'
+                        if (this.hour < 1) {
+                            this.ishour = '分钟，再不睡觉！你生命的宽度也许会增加，但是你的生命长度肯定会减少';
+                        }
+                    } else {
+                        this.text = '完了，BBQ了'
+                        this.ishour = '你是秃头小宝贝';
+                    }
+                } else if (this.hour < 12) {
+                    if (7 < this.hour) {
+                        this.hour = ' ';
+                        this.text = '好好享受这最后一个美好的上午吧，明天就要搬砖去了'
+                    } else {
+                        if (this.hour < 2) {
+                            this.text = '还不睡??!!? 快睡啦';
+                        } else if (this.hour < 4) {
+                            this.text = '还不睡？你是熬夜小冠军，我先睡为敬';
+                        } else if (this.hour < 6) {
+                            this.text = '还没睡？还是说醒得太早，又或者是半夜惊醒,翻个身继续睡';
+                        } else {
+                            this.text = '该起床啦，今天又是美好的一天';
+                        }
+                    }
+                } else {
+                    this.text = '好好享受这最后一个美好的下午吧，明天就要搬砖去了'
+                }
+            }
+            //周五只有下班，没有上班
+            if (date.getDay() === 5) {
+                if (this.hour > 17) {
+                    if (23 > this.hour > 21) {
+                        this.hour = 22 - this.hour;
+                        this.text = '距离健康作息休息时间，你距离睡觉还有'
+                        if (this.hour < 1) {
+                            this.ishour = '分钟，再不睡觉！你生命的宽度也许会增加，但是你的生命长度肯定会减少';
+                        } else {
+                            this.text = '完了，BBQ了'
+                            this.ishour = '拴Q';
+                        }
+                    } else if (this.hour < 21) {
+                        this.text = '蟹老板，我下班了';
+                    } else {
+                        this.hour = 32 + 48 - this.hour;
+                        this.text = '距离下周上班还有';
+                    }
+                } else if (14 > this.hour > 11) {
+                    if (11 < this.hour < 13) {
+                        this.hour = this.hour - 12;
+                        this.text = '午休已经开始';
+                        this.ishour = '分钟';
+                    } else {
+                        this.hour = 13 - this.hour;
+                        this.text = '距离午休结束还有';
+                        this.ishour = '分钟';
+                    }
+                } else if (this.hour < 12) {
+                    if (8 < this.hour) {
+                        this.hour = 11 - this.hour;
+                        this.text = '距离午休还有';
+                        if (this.hour < 1) {
+                            this.ishour = '分钟';
+                        }
+                    } else if (this.hour < 8) {
+                        if (this.hour < 2) {
+                            this.hour = 8 - this.hour;
+                            this.text = '还不睡??!!?,距离上班还有';
+                        } else if (this.hour < 4) {
+                            this.hour = 8 - this.hour;
+                            this.text = '还不睡？你是熬夜小冠军,距离上班还有';
 
-        this.toString = function () {
-            this.hour = this.hour < 10 ? "0" + this.hour : this.hour;
-            this.minute = this.minute < 10 ? "0" + this.minute : this.minute;
-            return this.text + " " + this.hour + ":" + this.minute + ":" + this.second + " " + this.ishour;
-        };
+                        } else if (this.hour < 6) {
+                            this.hour = 8 - this.hour;
+                            this.text = '还没睡？还是说醒得太早，又或者是半夜惊醒,距离上班还有';
+                        } else {
+                            this.hour = 8 - this.hour;
+                            this.text = '该起床上班了，距离上班还有';
 
-
-        this.toDetailDate = function () {
-            return this.hour + ":" + this.minute + ":" + this.second;
-        };
+                            if (this.hour < 1) {
+                                this.ishour = '分钟';
+                            }
+                        }
+                    } else if (this.hour < 9) {
+                        this.hour = 8 - this.hour;
+                        this.text = '距离上班还有';
+                        if (this.hour < 1) {
+                            this.ishour = '分钟';
+                        }
+                    }
+                } else {
+                    this.hour = 17 - this.hour;
+                    this.text = '距离下班还有'
+                    if (this.hour < 1) {
+                        this.ishour = '分钟';
+                    }
+                }
+            }
+            //周六
+            if (date.getDay() === 6) {
+                if (this.hour > 17) {
+                    this.hour = 32 + 24 - this.hour;
+                    this.text = '距离下周上班还有';
+                    if (23 > this.hour > 21) {
+                        this.hour = 22 - this.hour;
+                        this.text = '距离健康作息休息时间，你距离睡觉还有'
+                        if (this.hour < 1) {
+                            this.ishour = '分钟，再不睡觉！你生命的宽度也许会增加，但是你的生命长度肯定会减少';
+                        } else {
+                            this.text = '完了，BBQ了'
+                            this.ishour = '拴Q';
+                        }
+                    }
+                } else if (this.hour < 8) {
+                    if (this.hour < 2) {
+                        this.text = '还不睡??!!? 快睡啦';
+                    } else if (this.hour < 4) {
+                        this.text = '还不睡？你是熬夜小冠军，我先睡为敬';
+                    } else if (this.hour < 6) {
+                        this.text = '还没睡？还是说醒得太早，又或者是半夜惊醒,翻个身继续睡';
+                    } else {
+                        this.text = '该起床啦，今天又是美好的一天';
+                    }
+                } else {
+                    this.text = '放心玩！加油嗨!'
+                    this.ishour = '^_^'
+                }
+            }
+        }
+        if (date.getDay() === 1 || date.getDay() === 2 || date.getDay() === 3 || date.getDay() === 4) {
+            this.toString = function () {
+                this.hour = this.hour < 10 ? "0" + this.hour : this.hour;
+                this.minute = this.minute < 10 ? "0" + this.minute : this.minute;
+                this.second = this.second < 10 ? "0" + this.second : this.second;
+                return this.text + " " + this.hour + ": " + this.minute + " : " + this.second + " " + this.ishour;
+            };
+        } else if (date.getDay() === 0) {
+            this.toString = function () {
+                this.hour = this.hour < 10 ? "0" + this.hour : this.hour;
+                this.minute = this.minute < 10 ? "0" + this.minute : this.minute;
+                this.second = this.second < 10 ? "0" + this.second : this.second;
+                return this.text + " " + this.hour + ": " + this.minute + " : " + this.second + " " + this.ishour;
+            };
+        } else if (date.getDay() === 5) {
+            this.toString = function () {
+                this.hour = this.hour < 10 ? "0" + this.hour : this.hour;
+                this.minute = this.minute < 10 ? "0" + this.minute : this.minute;
+                this.second = this.second < 10 ? "0" + this.second : this.second;
+                return this.text + " " + this.hour + ": " + this.minute + " : " + this.second + " " + this.ishour;
+            };
+        } else {
+            this.toString = function () {
+                this.hour = this.hour < 10 ? "0" + this.hour : this.hour;
+                this.minute = this.minute < 10 ? "0" + this.minute : this.minute;
+                this.second = this.second < 10 ? "0" + this.second : this.second;
+                return this.text + " " + this.hour + ": " + this.minute + " : " + this.second + " " + this.ishour;
+            };
+        }
 
         this.display = function (ele) {
             var ontime = new Ontime();
@@ -213,17 +394,11 @@
     onday.display(document.getElementById("onday"));
 
     function Onday() {
-
         var date = new Date();
-
-        this.day = new Array("星期天,美好的一天", "星期一，美好的一周又开始了", "星期二，距离周末还有四天", "星期三，快了快了已经一半了", "星期四，距离周末还有最后两天了", "星期五，再坚持一下，马上就放假了", "星期六，今天不上班")[date.getDay()];
-
-
+        this.day = new Array("星期天,美好的一天", "星期一，美好的一周开始了", "星期二，距离周末还有四天", "星期三，快了快了已经一半了", "星期四，距离周末还有最后两天了", "星期五，再坚持一下，马上就放假了", "星期六，今天不上班")[date.getDay()];
         this.toString = function () {
             return "今天是" + this.day;
         };
-
-
         this.display = function (ele) {
             var onday = new Onday();
             ele.innerHTML = onday.toString();
@@ -232,6 +407,5 @@
             }, 1000);
         };
     }
-
 </script>
 </html>
