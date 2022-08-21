@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+$bg: #000000;
+$lights-width: 2;
+$lights-count: 100;
+$font-family:'Bungee', cursive;
+$font-size: 3em;
+
+@mixin light-border-radius($radius) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+
+@mixin text-style{
+  $color : rgba(random(255), random(255), random(255), 1);
+  $color2 : rgba(random(255), random(255), random(255), 1);
+      display:block;
+      color: $color;
+      text-shadow: $color2 1px 1px 1px,
+        $color2 2px 2px 2px,
+        $color2 3px 3px 3px,
+        $color 0px 0px 20px;
+      text-align:center;
+      font:{
+        size:$font-size;
+        family:$font-family;
+      }
+  animation: flyin 3s 1s ease-out both infinite;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background : {
+    color: $bg;
+  }
+  
+  
+  
+ 
+  .merry-chrismas{
+    position:absolute;
+    
+  } 
+  
+  @keyframes flyin {
+  0%, 100% {
+    transform: perspective(0em) rotateX(0deg) translateY(0);
+  }
+  50% {
+    transform: perspective(0em) rotateX(0deg) translateY(-20px);
+  }
+  
+}
+
+@for $i from 1 through 8 {
+  
+  .merry-chrismas-#{$i}{
+   
+    &:before{
+      content:"HAPPY Birthday!!";
+      @include text-style;
+   }
+    
+    &:after{
+      content:"石镜茜";
+      @include text-style;
+   }
+
+}
+  
+     .merry-chrismas-#{$i} {
+       animation: text-blink-#{$i} 0.5s linear alternate infinite;
+       animation-delay: $i * .10s;
+      }
+      .merry-chrismas-#{$i} {
+        @keyframes text-blink-#{$i} {
+           from { opacity:0; }
+           to { opacity:1; }
+      }
+    }
+  }
+  
+  
+
+  .lights {
+    width: $lights-width+px;
+    height: $lights-width+px;
+    @include light-border-radius(50%);
+  }
+
+  @for $i from 1 through $lights-count {
+    .light-#{$i} {
+      position: absolute;
+      top:  percentage(random(100)/100);
+      left: percentage(random(100)/100);
+      background: {
+        color: rgba(random(255), random(255), random(255), 1);
+      }
+      
+        animation: blink-#{$i} 0.5s ease-in infinite;
+        animation-delay: $i * .01s;
+      
+      @keyframes blink-#{$i} {
+      from { opacity: 0; transform: perspective(0em) rotateX(0deg) translateY(0); }
+      to { opacity: 1; transform: perspective(0em) rotateX(0deg) translateY(-20px); }
+       }
+    }
+  }
+}
+
+.author{
+        position:absolute;
+        bottom:0;
+        right:0;
+        font-size:15px;
+        padding:20px;
+        text-align:center;
+       
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+        
+        text-shadow: 2px 2px 3px rgba(120,0,20,.9);
+        font-style:italic;
+        padding:1em;
+        color:#700;
+        color:rgba(120,0,20,.9);
+    }
+    .author a, .author a:active, .author a:hover, .author a:visited{
+        text-decoration:none;
+        color:rgba(120,0,20,.9);
+    }
+    .author .heart{
+        color: #e25555;
+         text-shadow: 2px 2px 3px #e25555;
+        font-size:30px;
+    }
+
+
+@media screen 
+  and (device-width: 360px) {
+  $font-size: 3em;
+    
+    .merry-chrismas{
+      &:after{
+        font:{
+          size:$font-size !important;
+        }
+      }
+      
+      &:before{
+        font:{
+          size:$font-size !important;
+        }
+      }
+    }
+}
+
+@media screen 
+  and (device-width: 480px) {
+  $font-size: 3em;
+    
+    .merry-chrismas{
+      &:after{
+        font:{
+          size:$font-size !important;
+        }
+      }
+      
+      &:before{
+        font:{
+          size:$font-size !important;
+        }
+      }
+    }
+}
+
+@media screen 
+  and (device-width: 640px) {
+  $font-size: 4em;
+    
+    .merry-chrismas{
+      &:after{
+        font:{
+          size:$font-size !important;
+        }
+      }
+      
+      &:before{
+        font:{
+          size:$font-size !important;
+        }
+      }
+    }
+}
+
+@media screen 
+  and (device-width: 720px) {
+  $font-size: 4em;
+    
+    .merry-chrismas{
+      &:after{
+        font:{
+          size:$font-size !important;
+        }
+      }
+      
+      &:before{
+        font:{
+          size:$font-size !important;
+        }
+      }
+    }
+}
