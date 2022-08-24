@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>摸鱼ing</title>
-    
+
     <style>
         body {
             width: 100%;
@@ -60,7 +60,7 @@
             text-align: center;
         }
     </style>
-    
+
 </head>
 
 <body>
@@ -201,7 +201,7 @@
                 }
             } else if (11 < this.hour < 18) {
                 if (this.hour < 13) {
-                    this.hour = this.hour - 12;
+                    this.hour = 12 - this.hour;
                     this.text = '午休已经开始';
                     this.ishour = '分钟';
                 } else if (12 < this.hour < 14) {
@@ -397,9 +397,19 @@
 
     function Onday() {
         var date = new Date();
+        this.second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
         this.day = new Array("星期天,美好的一天", "星期一，美好的一周开始了", "星期二，距离周末还有四天", "星期三，快了快了已经一半了", "星期四，距离周末还有最后两天了", "星期五，再坚持一下，马上就放假了", "星期六，今天不上班")[date.getDay()];
         this.toString = function () {
-            return "今天是" + this.day;
+            if (date.getDate() === 0 && date.getDate() === 6) {
+                return "管他星期几，反正今天不上班";
+            } else {
+                if (17 < this.second) {
+                    return "管他星期几，反正下班了";
+                } else {
+                    return "今天是" + this.day;
+                }
+            }
+
         };
         this.display = function (ele) {
             var onday = new Onday();
